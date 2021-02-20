@@ -9,8 +9,9 @@ class App(Resource):
     parser = reqparse.RequestParser()
     
     def post(self):
-        key = data.length + 1
-        data.push({key : App.parser.parse_args()})
+        data.append(App.parser.parse_args())
+            
+        
         
     def get(self):
         return data
