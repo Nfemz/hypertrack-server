@@ -4,18 +4,18 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)
 api = Api(app)
 
+data = []
 class App(Resource):
     parser = reqparse.RequestParser()
     
     def post(self):
-        data = App.parser.parse_args()
-        print(data)
-        return data, 200
-    
+        key = data.length + 1
+        data.push({key : App.parser.parse_args()})
+        
     def get(self):
-        return 'Hello World'
+        return data
     
-api.add_resource(App, '/')
+api.add_resource(App, '/dataStream')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
