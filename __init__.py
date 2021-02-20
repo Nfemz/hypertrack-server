@@ -6,10 +6,14 @@ api = Api(app)
 
 class App(Resource):
     parser = reqparse.RequestParser()
+    
     def post(self):
         data = App.parser.parse_args()
         print(data)
         return data, 200
+    
+    def get(self):
+        return 'Hello World'
     
 api.add_resource(App, '/')
 
