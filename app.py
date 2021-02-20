@@ -1,20 +1,20 @@
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
+from flask import Flask, request
+from flask_restful import Resource, Api
 
 app = Flask(__name__)
 api = Api(app)
 
-data = []
+items = []
 class App(Resource):
-    parser = reqparse.RequestParser()
     
     def post(self):
-        data.append(App.parser.parse_args())
-            
+        data = request.json
+        items.append(data)
+        return data
         
         
     def get(self):
-        return data
+        return items
     
 api.add_resource(App, '/')
 
