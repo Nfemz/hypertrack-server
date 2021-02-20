@@ -10,6 +10,8 @@ geofence_history = []
 battery_history = []
 
 class Webhook(Resource):
+    def get(self):
+        return {'message': 'Welcome to the root level of the hypertrack test server'}, 200
     def post(self):
         data = request.json
         print(data)
