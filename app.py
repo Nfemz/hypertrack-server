@@ -17,7 +17,7 @@ class Webhook(Resource):
                 "GET": "Returns the root directory with documentation",
                 "POST": "Webhook endpoint to receive incoming data from HyperTrack"
                 },
-            "/device": {
+            "/deviceStatus": {
                 "GET": "Returns history object of all device status updates received"
                 },
             "/location": {
