@@ -15,7 +15,7 @@ class App(Resource):
     def get(self):
         return data
     
-api.add_resource(App, '/dataStream')
+api.add_resource(App, '/')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
