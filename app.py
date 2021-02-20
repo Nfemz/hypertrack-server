@@ -11,7 +11,25 @@ battery_history = []
 
 class Webhook(Resource):
     def get(self):
-        return {'message': 'Welcome to the root level of the hypertrack test server'}, 200
+        return {
+            'message': 'Welcome to the root level of the hypertrack test server',
+            "/": {
+                "GET": "Returns the root directory with documentation",
+                "POST": "Webhook endpoint to receive incoming data from HyperTrack"
+                },
+            "/device": {
+                "GET": "Returns history object of all device status updates received"
+                },
+            "/location": {
+                'GET': "Returns history object of all location updates received"
+                },
+            "/geofence": {
+                "GET": "Returns history object of all geofence updates received"
+                },
+            "/battery": {
+                "GET": "Returns history object of all battery updates received"
+                }
+                }, 200
     def post(self):
         data = request.json
         print(data)
