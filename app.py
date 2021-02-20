@@ -17,4 +17,5 @@ class App(Resource):
     
 api.add_resource(App, '/')
 
-app.run(port=5000, debug=True)
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
