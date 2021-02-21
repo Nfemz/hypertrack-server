@@ -14,6 +14,7 @@ flask_sqlalchemy = "^2.4.4"
 psycopg2 = "^2.8.6"
 flask-marshmallow = "^0.14.0"
 marshmallow_sqlalchemy = "^0.24.2"
+flask_cors = "^3.0.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
