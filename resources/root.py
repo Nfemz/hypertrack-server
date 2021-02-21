@@ -9,7 +9,17 @@ class RootResource(Resource):
             "/": {
                 "GET": "Returns the root directory with documentation",
                 "POST": "Webhook endpoint to receive incoming data from HyperTrack"
-                }
+                },
+            "/device/:device_id": {
+                "GET": "Returns the most up to date info on the device",
+                "POST": "Updates the device document"
+            },
+            "/devices": {
+                "GET": "Returns all devices"
+            },
+            "locations/:device_id": {
+                "GET": "Returns the history of all location updates on the device"
+            }
         }
         
     def post(self):
