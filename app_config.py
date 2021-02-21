@@ -10,10 +10,13 @@ if __name__ == '__main__':
     postgres_uri = 'postgresql://localhost/hyper-track'
 else:
     postgres_uri = 'postgres://rtsxdpgdxdnmjb:e88e7ac4409a75ca38a3b3b702b45942416a56db54b1a87eaf2ace51f00c05b1@ec2-54-198-73-79.compute-1.amazonaws.com:5432/d31i7r7eemsjrq'
-    
-cors = CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = postgres_uri
+
+CORS(app, resources={r"/": {"origins": "*"}})
+
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 db = SQLAlchemy(app)
 
