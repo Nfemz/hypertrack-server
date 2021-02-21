@@ -1,7 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from models.battery import BatteryStatus
-from app_config import db
+from utils import handleBatteryUpdate, handleDeviceStatusUpdate, handleLocationUpdate, addLocationPoint
 
 class RootResource(Resource):
     def get(self):
@@ -10,35 +9,19 @@ class RootResource(Resource):
             "/": {
                 "GET": "Returns the root directory with documentation",
                 "POST": "Webhook endpoint to receive incoming data from HyperTrack"
-                },
-            "/deviceStatus": {
-                "GET": "Returns history object of all device status updates received"
-                },
-            "/location": {
-                'GET': "Returns history object of all location updates received"
-                },
-            "/geofence": {
-                "GET": "Returns history object of all geofence updates received"
-                },
-            "/battery": {
-                "GET": "Returns history object of all battery updates received"
                 }
-                }, 200
+        }
         
     def post(self):
         data = request.json
         for item in data:
             if (item['type'] == 'device_status'):
-                print('hi')
+                handleDeviceStatusUpdate(item)
+                
             elif (item['type'] == 'location'):
-                print('hi')
-            elif (item['type'] == 'geofence'):
-                print('hi')
+                handleLocationUpdate(item)
+                addLocationPoint(item)
             elif (item['type'] == 'battery'):
-                device_status_item = BatteryStatus(item['data']['value'], item['recorded_at'])
-                db.session.add(device_status_item)
-                db.session.commit()
-            else:
-                return {'message': 'Invalid data received'}, 400
+                handleBatteryUpdate(item)
         
         return {'message': 'data posted correctly'}, 201
