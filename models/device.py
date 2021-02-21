@@ -11,6 +11,7 @@ class Device(db.Model):
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
     altitude = db.Column(db.Float)
+    device_user = db.Column(db.String)
     
     def __init__(self, device_id, recorded_at):
         self.device_id = device_id
@@ -40,7 +41,12 @@ class Device(db.Model):
         self._rev += 1
         db.session.commit()
         return device_schema.dump(self.get_device(self.device_id))
-        
+    
+    def update_device_user(self, device_user):
+        self.device_user = device_user
+        self._rev += 1
+        db.session.commit()
+        return device_schema.dump(self.get_device(self.device_id))    
         
     def get_location(self):
         return [self.latitude, self.longitude, self.altitude]
@@ -75,5 +81,6 @@ class DeviceSchema(SQLAlchemySchema):
     longitude = auto_field()
     latitude = auto_field()
     longitude = auto_field()
+    device_user = auto_field()
     
 device_schema = DeviceSchema()

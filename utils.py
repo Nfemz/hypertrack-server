@@ -53,3 +53,10 @@ def handleBatteryUpdate(item):
     recorded_at = item['recorded_at']
     
     return device.update_battery_status(battery_status, recorded_at)
+
+def handleDeviceUserUpdate(device_user, device_id):
+    device = Device.get_device(device_id)
+    if not device:
+        raise Exception('This device id does not exist')
+    
+    return device.update_device_user(device_user)

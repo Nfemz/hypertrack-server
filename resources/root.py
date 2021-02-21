@@ -24,4 +24,4 @@ class RootResource(Resource):
             elif (item['type'] == 'battery'):
                 handleBatteryUpdate(item)
         
-        return {'message': 'data posted correctly'}, 201
+        return {'update_body': data}, 201
