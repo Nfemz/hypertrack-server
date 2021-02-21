@@ -13,7 +13,7 @@ else:
     
 cors = CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/hyper-track'
+app.config['SQLALCHEMY_DATABASE_URI'] = postgres_uri
 
 db = SQLAlchemy(app)
 
