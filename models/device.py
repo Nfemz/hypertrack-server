@@ -47,6 +47,12 @@ class Device(db.Model):
         self._rev += 1
         db.session.commit()
         return device_schema.dump(self.get_device(self.device_id))    
+    
+    def update_device_status_only(self, device_status):
+        self.device_status = device_status
+        self._rev += 1
+        db.session.commit()
+        return device_schema.dump(self.get_device(self.device_id))
         
     def get_location(self):
         return [self.latitude, self.longitude, self.altitude]

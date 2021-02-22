@@ -2,7 +2,7 @@ from models.device import Device, device_schema
 from flask_restful import Resource
 from flask import request
 import json
-from utils import handleDeviceUserUpdate
+from utils import handleDeviceUserUpdate, handleUpdateDeviceStatusOnly
 
 class DeviceResource(Resource):
     def get(self, device_id):
@@ -11,8 +11,10 @@ class DeviceResource(Resource):
     
     def post(self, device_id):
         data = request.json
-        if data['device_user']:
+        if 'device_user' in data:
             handleDeviceUserUpdate(data['device_user'], device_id)
+        if 'device_status' in data:
+            handleUpdateDeviceStatusOnly(data['device_status'], device_id)
         return {'update_body': data}, 201
 
     
