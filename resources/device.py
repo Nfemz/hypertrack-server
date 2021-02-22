@@ -2,7 +2,9 @@ from models.device import Device, device_schema
 from flask_restful import Resource
 from flask import request
 import json
-from utils import handleDeviceUserUpdate, handleUpdateDeviceStatusOnly
+from utils import handleDeviceUserUpdate, handleDeviceStatusUpdate
+import datetime
+
 
 class DeviceResource(Resource):
     def get(self, device_id):
@@ -14,7 +16,14 @@ class DeviceResource(Resource):
         if 'device_user' in data:
             handleDeviceUserUpdate(data['device_user'], device_id)
         if 'device_status' in data:
-            handleUpdateDeviceStatusOnly(data['device_status'], device_id)
+            item = {
+                'data': {
+                    'value': data['device_status']
+                },
+                'device_id': device_id,
+                'recorded_at': datetime.datetime.utcnow().isoformat() + 'Z'
+            }
+            handleDeviceStatusUpdate(item)
         return {'update_body': data}, 201
 
     

@@ -41,14 +41,8 @@ def handleDeviceStatusUpdate(item):
     
     device_status = item['data']['value']
     recorded_at = item['recorded_at']
+   
     return device.update_device_status(device_status, recorded_at)
-
-def handleUpdateDeviceStatusOnly(device_status, device_id):
-    device = Device.get_device(device_id)
-    if not device:
-        raise Exception('This device id does not exist')
-    
-    return device.update_device_status_only(device_status)
 
 def handleBatteryUpdate(item):
     device = Device.get_device(item['device_id'])
