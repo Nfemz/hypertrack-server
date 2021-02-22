@@ -49,3 +49,5 @@ Webhook for HyperTrack device data:
 ```
 curl -x POST https://https://hypertrack-server.herokuapp.com/
 ```
+
+*TO DO: Add in graphql endpoint for subscription services to device updates*
